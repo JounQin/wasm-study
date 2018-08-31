@@ -22,9 +22,6 @@ const config: Configuration = {
   resolve: {
     extensions: ['.ts', '.js'],
   },
-  resolveLoader: {
-    modules: [resolve('packages'), 'node_modules'],
-  },
   module: {
     rules: [
       {
@@ -32,7 +29,7 @@ const config: Configuration = {
         oneOf: [
           {
             include: resolve('asms'),
-            loader: 'asms-loader',
+            loader: resolve('asms-loader'),
             type: 'webassembly/experimental',
           },
           {
