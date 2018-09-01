@@ -1,5 +1,6 @@
 import { resolve } from 'path'
 
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { Configuration } from 'webpack'
 
@@ -42,7 +43,15 @@ const config: Configuration = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      // ignore asms no name found error
+      ignoreDiagnostics: [2304],
+      tslint: true,
+      workers: ForkTsCheckerWebpackPlugin.TWO_CPUS_FREE,
+    }),
+  ],
 }
 
 export default config
