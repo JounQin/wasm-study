@@ -39,8 +39,12 @@ function compile() {
       return this.callback(err)
     }
     fs.readFile(resourcePath + '.wasm', (err, binary) => {
-      fs.unlinkSync(resourcePath + '.wat')
-      fs.unlinkSync(resourcePath + '.wasm')
+      try {
+        fs.unlinkSync(resourcePath + '.wat')
+        fs.unlinkSync(resourcePath + '.wasm')
+      } catch (e) {
+        err = e
+      }
       if (err) {
         return this.callback(err)
       }
@@ -53,7 +57,11 @@ function compile() {
         return this.callback(null, binary)
       }
       fs.readFile(resourcePath + '.wasm.map', (err, sourceMap) => {
-        fs.unlinkSync(resourcePath + '.wasm.map')
+        try {
+          fs.unlinkSync(resourcePath + '.wasm.map')
+        } catch (e) {
+          err = e
+        }
         if (err) {
           return this.callback(err)
         }

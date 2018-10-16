@@ -48,7 +48,6 @@ const config: Configuration = {
     new ForkTsCheckerWebpackPlugin({
       // ignore asms no name found error
       ignoreDiagnostics: [2304],
-      tslint: true,
       workers: ForkTsCheckerWebpackPlugin.TWO_CPUS_FREE,
     }),
   ],
